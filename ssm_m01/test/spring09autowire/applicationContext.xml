@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd"
+    >
+    <bean id="computer" class="spring09autowire.Computer"></bean>
+    <bean id="computer1" class="spring09autowire.Computer"></bean>
+    <bean id="gameInterface" class="spring09autowire.Computer"></bean>
+    <!--
+    @autowire默认是byType
+    autowire="byType"   根据类型进行对应的属性注入
+    扫描整个spring的配置文件，匹配与目标属性注入的相同类型，匹配到之后，自动为该属性进行注入
+
+    autowire="byName" 根据名称进行对应的属性注入
+    扫描整个spring的配置文件，匹配与目标属性名称相同的ID，匹配完成后，把由该标签创建的对象，自动注入到属性中
+    -->
+    <!--<bean id="student" class="spring09autowire.Student" autowire="byType">-->
+    <!--<bean id="student" class="spring09autowire.Student" autowire="byName">
+
+    </bean>-->
+    <bean id="student" class="spring09autowire.Student" autowire="byName">
+        <constructor-arg ref="computer"/>
+    </bean>
+
+
+    </beans>

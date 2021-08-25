@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd"
+    >
+    <bean id="teacher" class="spring10jbsjlx.Teacher">
+        <property name="name" value="王源"></property>
+        <property name="age" value="20"></property>
+        <property name="friendName">
+            <list>
+                <value>小黑</value>
+                <value>小白</value>
+                <value>小王</value>
+                <value>小蔡</value>
+            </list>
+        </property>
+
+        <property name="loverName">
+            <!--set集合自动去重-->
+            <set>
+                <value>张三</value>
+                <value>张三</value>
+                <value>张三</value>
+                <value>李四</value>
+            </set>
+        </property>
+
+        <property name="score">
+            <map>
+                <entry key="java" value="92"></entry>
+                <entry key="vue" value="80"></entry>
+                <entry key="jquery" value="89"></entry>
+            </map>
+        </property>
+        <property name="db">
+            <props>
+                <prop key="name">roy</prop>
+                <prop key="pass">123</prop>
+            </props>
+        </property>
+        </bean>
+    <!-- 取值  读取properties-->
+    <util:properties id="db" location="classpath:spring10jbsjlx/db.properties"></util:properties>
+
+    <!--使用 spring的el表达式  读取 bean的属性值-->
+    <bean id="teacherEL" class="spring10jbsjlx.TeacherEL">
+        <property name="name" value="#{teacher.name}"></property>
+        <property name="age" value="#{teacher.age}"></property>
+        <property name="loverName" value="#{teacher.loverName[1]}"></property>
+        <property name="friendName" value="#{teacher.friendName[2]}"></property>
+        <!--<property name="score" value="#{teacher.score['jquery']}"></property>-->
+        <property name="score" value="#{teacher.score.jquery}"></property>
+        <!--<property name="db" value="#{db['username']}"></property>-->
+        <property name="db" value="#{db.username}"></property>
+    </bean>
+
+</beans>
